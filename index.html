@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lời Bày Tỏ Dành Riêng Cho Cậu 💕</title>
+    <meta name="description" content="Trang web tỏ tình lãng mạn, tinh tế với hiệu ứng sao băng, pháo hoa trái tim, nhạc lofi piano và phong thư bí mật.">
+
+    <!-- Google Fonts: Be Vietnam Pro, Dancing Script, Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Canvases for Starfield & Fireworks -->
+    <canvas id="starCanvas"></canvas>
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Floating Music Widget (Top Right) -->
+    <div class="floating-music-widget" title="Bật/Tắt nhạc nền lãng mạn">
+        <div class="music-visualizer" id="musicVisualizer">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="vinyl-disc" id="vinylDisc">
+            <div class="vinyl-center-dot"></div>
+        </div>
+        <button id="musicControlBtn" style="display:none;" aria-label="Toggle music"></button>
+    </div>
+
+    <!-- Floating Settings Button (Bottom Left) -->
+    <button class="floating-settings-btn" id="openSettingsBtn" title="Tùy biến tên & lời nhắn ⚙️" aria-label="Settings">
+        ⚙️
+    </button>
+
+    <!-- ================= STAGE 0: ENVELOPE INTRO ================= -->
+    <div class="intro-section" id="introSection">
+        <div class="intro-badge" data-bind="envelopeBadge">
+            ✨ Thư Mật Dành Riêng Cho Cậu
+        </div>
+
+        <div class="envelope-wrapper" id="secretEnvelope">
+            <div class="envelope-base">
+                <div class="flap-left"></div>
+                <div class="flap-right"></div>
+                <div class="flap-bottom"></div>
+                <div class="flap-top"></div>
+            </div>
+
+            <div class="wax-seal">
+                <span class="wax-seal-heart">💌</span>
+            </div>
+
+            <div class="envelope-letter">
+                <span class="mini-heart">💖</span>
+                <span class="mini-text">Dành tặng <span data-bind="crushName">Bé Yêu</span></span>
+            </div>
+        </div>
+
+        <p class="intro-prompt" data-bind="envelopePrompt">
+            Chạm vào phong thư để mở món quà đặc biệt ✨
+        </p>
+        <p class="intro-hint">
+            🎧 Đeo tai nghe để tận hưởng giai điệu ngọt ngào nhất
+        </p>
+
+        <button class="btn-open-envelope" id="openEnvelopeBtn">
+            Mở thư tình 💌
+        </button>
+    </div>
+
+    <!-- ================= MAIN JOURNEY CONTENT ================= -->
+    <main class="main-wrapper hidden" id="mainContent">
+
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-badge">
+                Dành cho người đặc biệt nhất 🌟
+            </div>
+            <h1 class="main-title">
+                Gửi <span data-bind="crushName">Bé Yêu</span>
+            </h1>
+            <p class="main-subtitle">
+                Có những lời chỉ muốn thì thầm cùng cậu dưới bầu trời đầy sao này...
+            </p>
+        </header>
+
+        <!-- Stage 1: Reasons / Moments Grid -->
+        <section class="section-reasons">
+            <h2 class="section-label">Những Khoảnh Khắc Trái Tim Loạn Nhịp ✨</h2>
+            <div class="reasons-grid" id="reasonsContainer">
+                <!-- Dynamically generated from config.js -->
+            </div>
+        </section>
+
+        <!-- Stage 2: Typewriter Love Letter -->
+        <section class="section-letter">
+            <div class="glass-card letter-glass">
+                <div class="letter-header">
+                    <h2 class="letter-title" data-bind="letterTitle">Gửi đến người tớ thương...</h2>
+                    <button class="btn-skip" id="skipTypewriterBtn">Đọc nhanh ⚡</button>
+                </div>
+                <div class="letter-body" id="letterBody">
+                    <!-- Typing text goes here -->
+                </div>
+                <div class="letter-signature-wrap" id="letterSignatureWrap">
+                    <p class="letter-signature-prefix" data-bind="letterSignature">Mãi hướng về cậu,</p>
+                    <p class="letter-signature-name" data-bind="senderName">Anh nè</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stage 3: The Big Question (Proposal Box) -->
+        <section class="section-proposal">
+            <div class="glass-card proposal-box" id="proposalBox">
+                <div class="beating-heart-icon">💖</div>
+                <h2 class="proposal-question" data-bind="question">
+                    Cậu có đồng ý làm người yêu của tớ không? 💕
+                </h2>
+                <p class="proposal-sub" data-bind="subQuestion">
+                    Được nắm tay cậu đi qua mọi mùa trong năm là điều tuyệt vời nhất trần đời...
+                </p>
+
+                <div class="actions-group">
+                    <button class="btn-yes" id="btnYes" data-bind="btnYes">
+                        Tớ đồng ý! ❤️
+                    </button>
+                    <button class="btn-no" id="btnNo" data-bind="btnNo">
+                        Không thèm đâu 😝
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= STAGE 4: CELEBRATION MODAL ================= -->
+    <div class="celebration-modal" id="celebrationModal">
+        <div class="celebration-container">
+            
+            <div class="celebration-badge" data-bind="celebrationBadge">
+                CHÍNH THỨC HẸN HÒ 💖
+            </div>
+
+            <h1 class="celebration-title" data-bind="celebrationTitle">
+                YAYYY! CẢM ƠN CẬU ĐÃ ĐỒNG Ý! 🎉
+            </h1>
+
+            <p class="celebration-msg" data-bind="celebrationMessage">
+                Từ giây phút này, tớ chính thức là người may mắn và hạnh phúc nhất vũ trụ! Hứa sẽ luôn yêu thương, nhường nhịn và chăm sóc cậu thật tốt mỗi ngày.
+            </p>
+
+            <!-- Real-time Love Timer -->
+            <div class="love-timer-card">
+                <div class="timer-label" data-bind="timerLabel">
+                    Chúng mình đã bên nhau được:
+                </div>
+                <div class="timer-units">
+                    <div class="timer-unit-box">
+                        <span class="timer-number" id="timerDays">00</span>
+                        <span class="timer-tag">Ngày</span>
+                    </div>
+                    <div class="timer-unit-box">
+                        <span class="timer-number" id="timerHours">00</span>
+                        <span class="timer-tag">Giờ</span>
+                    </div>
+                    <div class="timer-unit-box">
+                        <span class="timer-number" id="timerMins">00</span>
+                        <span class="timer-tag">Phút</span>
+                    </div>
+                    <div class="timer-unit-box">
+                        <span class="timer-number" id="timerSecs">00</span>
+                        <span class="timer-tag">Giây</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Official Certificate of Love -->
+            <div class="certificate-frame" id="certificateFrame">
+                <div class="cert-corner cert-tl"></div>
+                <div class="cert-corner cert-tr"></div>
+                <div class="cert-corner cert-bl"></div>
+                <div class="cert-corner cert-br"></div>
+
+                <div class="cert-header-icon">👑</div>
+                <h2 class="cert-title" data-bind="certificateTitle">GIẤY CHỨNG NHẬN TÌNH YÊU</h2>
+                
+                <div class="cert-names">
+                    <span data-bind="senderName">Anh nè</span>
+                    <span class="cert-heart-divider">❤️</span>
+                    <span data-bind="crushName">Bé Yêu</span>
+                </div>
+
+                <p class="cert-contract" data-bind="contractText">
+                    Chứng nhận rằng hai trái tim đã chính thức thuộc về nhau. Kể từ hôm nay, mọi giận hờn sẽ được dỗ dành bằng trà sữa và những cái ôm thật chặt!
+                </p>
+
+                <div class="cert-footer">
+                    <div class="cert-sign-box">
+                        <div class="cert-sign-label">Ngày ghi dấu</div>
+                        <div class="cert-sign-val" id="certDate">Hôm nay</div>
+                    </div>
+
+                    <div class="cert-stamp">
+                        <span class="cert-stamp-star">★ ★ ★</span>
+                        <span>OFFICIAL</span>
+                        <span>LOVE SEAL</span>
+                    </div>
+
+                    <div class="cert-sign-box">
+                        <div class="cert-sign-label">Trạng thái</div>
+                        <div class="cert-sign-val" style="color:#d90429;">Đã Say Đắm 💕</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Celebration Actions -->
+            <div class="celebration-actions">
+                <button class="btn-celeb-action" id="moreFireworksBtn">
+                    Bắn thêm pháo hoa 🎉
+                </button>
+                <button class="btn-celeb-action" id="moreHeartsBtn">
+                    Thả ngàn trái tim 💖
+                </button>
+                <button class="btn-celeb-action" id="saveCertBtn">
+                    In / Chụp chứng nhận 📸
+                </button>
+            </div>
+
+            <button class="btn-close-modal" id="closeCertBtn">
+                Quay lại ngắm sao cùng nhau ✨
+            </button>
+
+        </div>
+    </div>
+
+    <!-- ================= SETTINGS MODAL ================= -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h3>⚙️ Tùy Biến Cho Riêng Bạn</h3>
+                <button class="close-btn" id="closeSettingsBtn">&times;</button>
+            </div>
+
+            <div class="setting-group">
+                <label for="inputCrushName">Tên người ấy (Crush):</label>
+                <input type="text" id="inputCrushName" placeholder="VD: Phương Anh, Em bé, Tiểu My...">
+            </div>
+
+            <div class="setting-group">
+                <label for="inputSenderName">Tên của bạn:</label>
+                <input type="text" id="inputSenderName" placeholder="VD: Hoàng Nam, Anh nè, Tớ nè...">
+            </div>
+
+            <div class="setting-group">
+                <label for="inputLetterContent">Nội dung thư tình (ngăn cách các đoạn bằng 2 lần xuống dòng):</label>
+                <textarea id="inputLetterContent" rows="5" placeholder="Viết những lời thật lòng từ trái tim bạn..."></textarea>
+            </div>
+
+            <div class="setting-group">
+                <label for="inputMusicUrl">Link nhạc MP3 nền riêng (để trống nếu dùng piano lofi mặc định):</label>
+                <input type="text" id="inputMusicUrl" placeholder="https://domain.com/bai-hat-yeu-thich.mp3">
+            </div>
+
+            <div class="settings-footer">
+                <button class="btn-secondary" id="resetSettingsBtn">Khôi phục mặc định</button>
+                <button class="btn-primary" id="saveSettingsBtn">Lưu & Áp dụng ngay ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/sound-engine.js"></script>
+    <script src="js/starfield.js"></script>
+    <script src="js/fireworks.js"></script>
+    <script src="js/typewriter.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
